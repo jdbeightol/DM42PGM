@@ -163,10 +163,19 @@ clean:
 	-rm -fR .dep $(BUILD_DIR)/*.o $(BUILD_DIR)/*.lst
 
 #######################################
+# dev
+#######################################
+dev-build:
+	docker build -t dm42pgm:latest .
+
+dev:
+	docker run -v $(PWD):/workspace -it dm42pgm
+
+#######################################
 # dependencies
 #######################################
 -include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
 
-.PHONY: clean all
+.PHONY: clean all dev dev-build
 
 # *** EOF ***
